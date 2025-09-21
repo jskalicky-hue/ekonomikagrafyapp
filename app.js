@@ -2,10 +2,10 @@
 // --- Poptávka: lineárně klesající poptávka (q = c - d*p) ---
 // Parametry voleny tak, aby křivky byly rozumné a křížily se ve středu propojeného trhu
 
-// Nabídka: q = 10 + 2*p
-const nabidka_a = 10, nabidka_b = 2;
+// Nabídka: q = 2*p (při ceně 0 je nabídka 0)
+const nabidka_a = 0, nabidka_b = 2;
 
-// Poptávka: q = 100 - 3*p
+// Poptávka: q = 100 - 3*p (zůstává)
 const poptavka_c = 100, poptavka_d = 3;
 
 // Rozsahy
@@ -35,7 +35,7 @@ function drawNabidka() {
     ctx.clearRect(0,0,canvasNabidka.width,canvasNabidka.height);
 
     // Osy
-    drawAxes(ctx, 0, cenaMax, 0, poptavka_c, "Cena (Kč)", "Množství", canvasNabidka);
+    drawAxes(ctx, 0, cenaMax, 0, poptavka_c, "Cena (Kč za kg)", "Množství (kg jablek)", canvasNabidka);
 
     // Křivka nabídky
     ctx.strokeStyle = "#1976d2";
@@ -61,10 +61,48 @@ function drawNabidka() {
 function updateNabidka() {
     const cena = Number(priceNabidka.value);
     const mnozstvi = nabidka_a + nabidka_b*cena;
-    outputNabidka.textContent = `Nabídka při ceně ${cena} Kč: ${mnozstvi}`;
+    outputNabidka.textContent = `Nabídka při ceně ${cena} Kč: ${mnozstvi} kg jablek`;
     drawNabidka();
 }
 priceNabidka.addEventListener('input', updateNabidka);
+
+// --- Poptávka ---
+const pricePoptavka = document.getElementById('price-poptavka');
+const outputPoptavka = document.getElementById('output-poptavka');
+const canvasPoptavka = document.getElementById('canvas-poptavka');
+function drawPoptavka() {
+    const ctx = canvasPoptavka.getContext('2d');
+    ctx.clearRect(0,0,canvasPoptavka.width,canvasPoptavka.height);
+
+    drawAxes(ctx, 0, cenaMax, 0, poptavka_c, "Cena (Kč za kg)", "Množství (kg jablek)", canvasPoptavka);
+
+    ctx.strokeStyle = "#388e3c";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for(let p=0; p<=cenaMax; p+=1) {
+        let q = poptavka_c - poptavka_d*p;
+        let {x, y} = mapToCanvas(p, q, 0, cenaMax, 0, poptavka_c, canvasPoptavka);
+        if(p===0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Bod pro zadanou cenu
+    const p = Number(pricePoptavka.value);
+    const q = poptavka_c - poptavka_d*p;
+    const {x, y} = mapToCanvas(p, q, 0, cenaMax, 0, poptavka_c, canvasPoptavka);
+    ctx.fillStyle = "red";
+    ctx.beginPath();
+    ctx.arc(x, y, 6, 0, 2*Math.PI);
+    ctx.fill();
+}
+function updatePoptavka() {
+    const cena = Number(pricePoptavka.value);
+    const mnozstvi = poptavka_c - poptavka_d*cena;
+    outputPoptavka.textContent = `Poptávka při ceně ${cena} Kč: ${mnozstvi} kg jablek`;
+    drawPoptavka();
+}
+pricePoptavka.addEventListener('input', updatePoptavka);
 
 // --- Poptávka ---
 const pricePoptavka = document.getElementById('price-poptavka');
