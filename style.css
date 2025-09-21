@@ -1,16 +1,66 @@
 body {
-  font-family: sans-serif;
-  margin: 20px;
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+    margin: 0;
+    padding: 20px;
 }
-
-button {
-  margin-right: 8px;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  background: #f7f7f7;
-  cursor: pointer;
+h1 {
+    text-align: center;
 }
-
-button:hover {
-  background: #eee;
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+.tab {
+    background: #e0e0e0;
+    border: none;
+    padding: 10px 24px;
+    margin: 0 2px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 6px 6px 0 0;
+    outline: none;
+    transition: background 0.2s;
+}
+.tab.active {
+    background: #fff;
+    border-bottom: 2px solid #fff;
+    font-weight: bold;
+}
+.tab-content {
+    background: #fff;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+    max-width: 440px;
+    margin: auto;
+    padding: 24px;
+}
+label {
+    margin-bottom: 10px;
+    display: inline-block;
+}
+input[type="number"] {
+    width: 65px;
+    padding: 3px;
+    font-size: 15px;
+    margin-right: 8px;
+}
+.info {
+    margin-left: 10px;
+    font-weight: bold;
+    color: #374151;
+}
+.trh-info {
+    margin: 12px 0 10px 0;
+    line-height: 1.7;
+}
+canvas {
+    background: #f1f1f1;
+    margin-top: 16px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
