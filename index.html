@@ -1,24 +1,43 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <title>Grafy trhu</title>
-  <link rel="stylesheet" href="style.css">
-
-  <!-- React -->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-
-  <!-- Babel -->
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-  <!-- Recharts -->
-  <script src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Ekonomika - Grafy nabídky a poptávky</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="root"></div>
-
-  <!-- Tvoje aplikace musí být Babel-em -->
-  <script src="app.js" type="text/babel"></script>
+    <h1>Ekonomika - Grafy nabídky a poptávky</h1>
+    <div class="tabs">
+        <button class="tab active" data-tab="nabidka">Nabídka</button>
+        <button class="tab" data-tab="poptavka">Poptávka</button>
+        <button class="tab" data-tab="trh">Propojený trh</button>
+    </div>
+    <div class="tab-content" id="nabidka">
+        <h2>Nabídka</h2>
+        <label for="price-nabidka">Cena (Kč): </label>
+        <input type="number" id="price-nabidka" min="0" max="100" value="50">
+        <span class="info" id="output-nabidka"></span>
+        <canvas id="canvas-nabidka" width="400" height="250"></canvas>
+    </div>
+    <div class="tab-content" id="poptavka" style="display:none">
+        <h2>Poptávka</h2>
+        <label for="price-poptavka">Cena (Kč): </label>
+        <input type="number" id="price-poptavka" min="0" max="100" value="50">
+        <span class="info" id="output-poptavka"></span>
+        <canvas id="canvas-poptavka" width="400" height="250"></canvas>
+    </div>
+    <div class="tab-content" id="trh" style="display:none">
+        <h2>Propojený trh</h2>
+        <label for="price-trh">Cena (Kč): </label>
+        <input type="number" id="price-trh" min="0" max="46" value="23">
+        <div class="trh-info">
+            <div>Rovnovážná cena: <span id="eq-price"></span> Kč</div>
+            <div>Rovnovážné množství: <span id="eq-qty"></span></div>
+            <div>Nabídka při zadané ceně: <span id="trh-nabidka"></span></div>
+            <div>Poptávka při zadané ceně: <span id="trh-poptavka"></span></div>
+        </div>
+        <canvas id="canvas-trh" width="400" height="250"></canvas>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>
