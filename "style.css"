@@ -1,0 +1,16 @@
+body {
+  font-family: sans-serif;
+  margin: 20px;
+}
+
+button {
+  margin-right: 8px;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #eee;
+}
